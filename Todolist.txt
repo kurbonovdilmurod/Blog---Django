@@ -1,0 +1,8 @@
+DONE   Install and set up a django project
+DONE   Create app the blog
+Set up tailwind
+Database models for the posts
+List out posts
+Detail page for posts
+Models for thr comments
+Make it possible to add comments to posts
