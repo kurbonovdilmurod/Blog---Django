@@ -1,15 +1,14 @@
-from django.forms import ModelForm
+from django import forms
+from .models import Comment
 
-from blog.models import Comment
-
-
-class CommentForm(ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(CommentForm, self).__init__(*args, **kwargs)
-        self.fields['name'].widget.attrs.update({'class': 'w-full py-4 px-6 bg-gray-100'})
-        self.fields['content'].widget.attrs.update({'class': 'w-full py-4 px-6 bg-gray-100'})
-
+class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ('name', 'content',)
+        fields = ['body']
+
+    body = forms.CharField(
+        widget=forms.Textarea(
+            attrs={"class": "form-control", "placeholder": "Leave a comment!"}
+        )
+    )
