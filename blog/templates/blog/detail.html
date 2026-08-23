@@ -7,10 +7,16 @@
 <!-- Post Detail Start-->
     <h1 class="text-3xl">{{ post.title }}</h1>
 
-    <span class="text-sm text-gray-500">{{ post.created_at|date:'d.m.Y' }}</span>
+    <span class="text-sm text-gray-500">{{ post.created_on|date:'d.m.Y' }} |
+        Categories: {% for category in post.categories.all %}
+            <a href="{% url 'blog_category' category.name %}">
+                {{ category.name }}
+            </a>
+        {% endfor %}
+    </span>
 
     <div class="mt-8 text-lg">
-        {{ post.content }}
+        {{ post.content | linebreaks }}
     </div>
 <!-- Post Detail End -->
 
@@ -19,10 +25,10 @@
     <div class="mt-8">
         <form method="post" action="." class="space-y-4">
             {% csrf_token %}
-
-            {{ form.as_p }}
-
-            <button class="py-4 px-8 bg-emerald-700 text-white">Submit</button>
+            <div>
+                {{ form.body }}
+            </div>
+            <button type="submit" class="py-4 px-8 bg-emerald-700 text-white">Submit</button>
         </form>
 <!-- Post Form End -->
 
@@ -33,11 +39,11 @@
 
 <!-- Post Comments Start -->
         <div class="space-y-4">
-            {% for comment in post.comments.all %}
+            {% for comment in comments %}
                 <div class="py-4 px-6 bg-gray-100">
-                    <h3 class="font-bold">{{ comment.name }} @ {{ comment.created_at|timesince }} ago </h3>
+                    <h3 class="font-bold">{{ comment.name }} @ {{ comment.created_on|timesince }} ago </h3>
 
-                    <p>{{ comment.content }}</p>
+                    <p>{{ comment.body }}</p>
                 </div>
             {% empty %}
                 <div class="py-4 px-6 bg-gray-100">
