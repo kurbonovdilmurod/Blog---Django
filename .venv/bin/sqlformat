@@ -1,4 +1,4 @@
-#!/home/dilmurod/Desktop/Blog---Django/.venv/bin/python3
+#!/home/dilmurod/Desktop/Blog---Django/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
