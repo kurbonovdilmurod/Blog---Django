@@ -21,3 +21,9 @@ class PostEditForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput)
     content = forms.CharField(widget=forms.Textarea(attrs={"size": "100"}))
     categories = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple)
+
+
+class CreatePostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'slug', 'content', 'categories']

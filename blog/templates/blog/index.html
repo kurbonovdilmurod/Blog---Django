@@ -4,6 +4,7 @@
 
 {% block content %}
     <div class="grid grid-cols-3 gap-6">
+        <button><a href="{% url 'create_blog' %}">Create Post</a></button>
         {% for post in posts %}
             {% include 'blog/partials/post.html' %}
         {% endfor %}
