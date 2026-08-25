@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 
-from blog.forms import CommentForm, PostEditForm
+from blog.forms import CommentForm, PostEditForm, CreatePostForm
 from blog.models import Post, Comment, Category
 
 
@@ -46,6 +46,21 @@ def blog_detail(request, slug):
     }
     return render(request, 'blog/detail.html', context)
 
+def create_blog(request):
+    if request.method == 'POST':
+        form = CreatePostForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect('blog_index')
+    else:
+        form = CreatePostForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'blog/create.html', context)
 
 def blog_edit(request, slug):
     post = get_object_or_404(Post, slug=slug)
